@@ -35,6 +35,7 @@ const Home = () => {
 
         const input = parent.querySelector('input')
         const taskId = input.id
+        // create a new array of todo which is a modified version of the previous todo
         const newTodo = todos.map(t => {
             if (t.id == taskId) {
                 t.isDone = input.checked
@@ -57,7 +58,7 @@ const Home = () => {
                 <nav className="home__nav">
                     <div>
                         <h1>Hey, {user}</h1>
-                        <p>You have <span>{uncompleted} tasks </span> to complete</p>
+                        <p>You have <span>{uncompleted} task(s) </span> to complete</p>
                     </div>
                     <div className="name__icon">
                         <p className="center">
@@ -73,10 +74,10 @@ const Home = () => {
                     <p ref={notDoneRef} onClick={() => filterBy('not-done', navRefs)} className="not-done">Not Completed</p>
                 </nav>
                 <div className="todo__lists">
-                    {tasks.map((todo, i) => {
+                    {tasks.map(todo => {
 
                         return (
-                            <div key={i} className="todo">
+                            <div key={todo.id} className="todo">
                                 <Link to={`/tasks/${todo.id}`}>
                                     <h3>{todo.title}</h3>
                                     <p>

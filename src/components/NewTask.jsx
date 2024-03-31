@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { handleSaveTodo } from '../utils'
 
 const NewTask = () => {
     const navigate = useNavigate()
@@ -11,28 +12,7 @@ const NewTask = () => {
     const handleChange = e => {
         setTask({ ...task, [e.target.name]: e.target.value })
     }
-    const handleSave = (e) => {
-        e.preventDefault()
-        const arr = []
-        for (const key in task) {
-            if (Object.hasOwnProperty.call(task, key)) {
-                const element = task[key];
-                arr.push(element)
-            }
-        }
-        if (arr.filter(e => e === '').length > 0) {
-            alert('Kindly fill all field')
-        } else {
-            console.log(todos)
-            task.id = new Date().getTime()
-            todos.push(task)
-            localStorage.setItem('todos', JSON.stringify(todos))
-            alert('done')
-            navigate('/home')
-        }
 
-    }
-    console.log(task)
     return (
         < div className="new__task__page center" >
             <form>
@@ -52,7 +32,7 @@ const NewTask = () => {
                     <label htmlFor="due__time">Due Time :</label>
                     <input required onChange={handleChange} name='dueTime' step="3600" type="time" id="due__time" />
                 </div>
-                <button onClick={handleSave}>Done</button>
+                <button onClick={(e) => handleSaveTodo(e, task, navigate, todos)}>Done</button>
             </form>
         </div >
     )

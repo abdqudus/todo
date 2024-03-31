@@ -1,29 +1,18 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { handleDeleteTodo, handleTodoState } from "../utils"
+import StartPage from "./StartPage"
 
 const Task = () => {
+    const user = localStorage.getItem('new-user')
     const { id } = useParams()
     const navigate = useNavigate()
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
 
     const task = todos.find(t => t.id == id)
-    const handleDelete = () => {
-        const filteredTodos = todos.filter(t => t.id != id)
-        localStorage.setItem('todos', JSON.stringify(filteredTodos))
-        navigate('/home')
-    }
-    const handleMark = () => {
-        const newTodo = todos.map(t => {
-            if (t.id == id) {
-                t.isDone = !t.isDone
-                return t
-            } else {
-                return t
-            }
-        })
-        localStorage.setItem('todos', JSON.stringify(newTodo))
-        setTodos(newTodo)
 
+    if (!user) {
+        return <StartPage />
     }
     return (
         <div className="task">
@@ -37,8 +26,8 @@ const Task = () => {
                 <p>Due Time: {task.dueTime}</p>
             </div>
             <div className="btn__div">
-                <button onClick={handleMark}>Mark as {task.isDone ? 'Incomplete' : 'Complete'}</button>
-                <button onClick={handleDelete} className="delete">Delete Task</button>
+                <button onClick={() => handleTodoState(todos, setTodos, id)}>Mark as {task.isDone ? 'Incomplete' : 'Complete'}</button>
+                <button onClick={() => handleDeleteTodo(todos, id, navigate)} className="delete">Delete Task</button>
             </div>
         </div>
     )

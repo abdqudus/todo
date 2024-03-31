@@ -5,7 +5,6 @@ import StartPage from './components/StartPage'
 import NewTask from './components/NewTask'
 import Task from './components/Task'
 const App = () => {
-  // localStorage.removeItem('new-user')
   return (
     <BrowserRouter>
       <Routes>
