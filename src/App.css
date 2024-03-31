@@ -1,0 +1,353 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+html {
+  font-family: "Inter", sans-serif;
+  --deep: #711db0;
+  --light: #e4ccfc;
+  color: var(--deep);
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  background: #fbfbfb;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.intro__container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.enter__name {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--deep);
+}
+.name__input {
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid var(--deep);
+  outline: none;
+  width: 40%;
+  background: inherit;
+}
+.name__input::placeholder {
+  font-weight: 600;
+  color: var(--deep);
+}
+.start__btn {
+  margin-top: 1rem;
+  color: var(--deep);
+  padding: 0.5rem 1rem;
+  width: 170px;
+  border-radius: 50px;
+  border: 1px solid var(--light);
+  background: var(--light);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  transition: border-color 0.3s linear;
+  align-items: center;
+}
+.start__btn img {
+  transition: transform 0.3s linear;
+}
+.start__btn:hover {
+  border-color: var(--deep);
+}
+.start__btn:hover img {
+  transform: translateX(5px);
+}
+.home__container {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.home__nav {
+  padding-block: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+.home__nav h1,
+.home__nav p {
+  color: black;
+}
+.home__nav p span {
+  color: var(--deep);
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+.name__icon p {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: var(--deep);
+}
+.name__icon p span {
+  display: block;
+  color: #fbfbfb;
+}
+
+.todos nav {
+  color: #a6a6a6;
+
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-block: 1rem;
+}
+.todos nav p {
+  padding-bottom: 0.35rem;
+  cursor: pointer;
+  transition: color 0.3s linear;
+  position: relative;
+}
+.todos nav p::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  position: absolute;
+  background: var(--deep);
+  top: 100%;
+  left: 0;
+  transition: width 0.3s ease-out;
+}
+.todos nav p:hover {
+  color: var(--deep);
+}
+.todos nav p:not(.active):hover::after {
+  width: 100%;
+}
+.todos nav p.active::after {
+  width: 100%;
+  color: var(--deep);
+}
+
+.todo__lists {
+  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+}
+.todo__lists .todo {
+  background: white;
+  padding: 1rem;
+  box-shadow: 0px 0px 10px 3px #c1c1c1;
+  min-height: 50px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.todo h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: #b163ff;
+}
+.todo p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #a6a6a6;
+}
+.todo .check {
+  position: absolute;
+  display: flex;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid #b163ff;
+  border-radius: 50%;
+  right: 1rem;
+  top: 1rem;
+  transition: background-color 0.3s linear;
+}
+
+.todo::after {
+  content: "";
+  position: absolute;
+}
+.todo:has(input:checked) .check {
+  background-color: #48d03c;
+  border: #48d03c;
+}
+
+@keyframes animate {
+  0% {
+    border: 0px solid #b163ff;
+    border-top: 2px solid #b163ff;
+  }
+}
+.new__task__btn {
+  position: fixed;
+  bottom: 1rem;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+  background: var(--light);
+  border: 1px solid var(--light);
+  color: var(--deep);
+}
+@media screen and (max-width: 330px) {
+  .todos nav {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 285px) {
+  .todo__lists .todo {
+    padding-top: 2rem;
+  }
+  .todo .check {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  .todo__lists {
+    grid-template-columns: 100%;
+  }
+}
+
+.new__task__page {
+  height: calc(100svh - 4rem);
+}
+.new__task__page form,
+.new__task__page form div {
+  display: grid;
+  gap: 2rem;
+}
+.new__task__page form {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: auto;
+  width: 400px;
+  /* width: 100%; */
+  box-shadow: 0px 0px 10px 3px #c1c1c1;
+  max-width: 600px;
+}
+.new__task__page .form__div {
+  gap: 0.4em;
+  max-width: 100%;
+}
+
+.new__task__page input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid var(--deep);
+}
+textarea {
+  border: 1px solid var(--deep);
+  outline: 2px solid var(--deep);
+  padding: 1rem;
+}
+.new__task__page button {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 1.2rem;
+  background: var(--deep);
+  color: var(--light);
+  font-weight: 700;
+}
+@media screen and (min-width: 600px) {
+  body {
+    padding: 2rem;
+  }
+  .todos nav {
+    font-size: 1.4rem;
+  }
+}
+
+.task {
+  min-height: 100svh;
+  padding: 1.5rem 1rem;
+}
+.task h1 {
+  text-align: center;
+  padding: 1rem;
+}
+.task__description {
+  border-radius: 4px;
+  background: white;
+  min-height: 400px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #c1c1c1;
+}
+.task .due__schedule {
+  margin-top: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+@media screen and (min-width: 640px) {
+  .task .due__schedule {
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.4rem;
+  }
+}
+.task .btn__div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.task .btn__div button {
+  padding: 0.5rem 1rem;
+  border: none;
+  font-weight: 400;
+  font-size: 1.4rem;
+  border-radius: 6px;
+  color: white;
+  background: #50c878;
+  cursor: pointer;
+}
+.task .btn__div button.delete {
+  background: #b22222;
+}
